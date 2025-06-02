@@ -7,89 +7,85 @@
 
 Las expresiones regulares (regex) son patrones que nos permiten buscar, extraer, y transformar textos. En Python se utiliza el módulo [`re`](https://docs.python.org/3/library/re.html) para trabajar con estos patrones.
 
+### NOTAS:
+1. Para carácteres especificos, la busqueda es 100% especifica. Si buscas 'a' solo buscará 'a'. Significa que ignorará a la 'A' 
+--------------------------------------
 - **`.`**: 
--Por lo mismo lo primero que se importará será el modulo  _RE_.
+- Por lo mismo lo primero que se importará será el modulo  _RE_.
   ```python
     import re
 # ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
 # _METACARACTERES BÁSICOS_
+
 # 1. El punto (.) representa cualquier carácter excepto un salto de línea.
+
 ```sh
-pattern = r'a.'  # 'a' seguido de cualquier carácter
-texto = "abc ade"
-# 1. El punto (.) representa cualquier carácter excepto un salto de línea.
-pattern = r'a.'  # 'a' seguido de cualquier carácter
-texto = "abc ade"
-# Se devuelve 'ab' (la 'a' seguida de 'b') y 'ad' (la 'a' seguida de 'd')
-resultado = re.findall(pattern, texto)
-print("1. Punto (.)")
-print("Explicación: '.' significa cualquier carácter, excepto salto de línea. Por ello, 'a.' busca la 'a' seguida de otro carácter.")
-print("Texto:", texto)
-print("Regex:", pattern)
+pattern = r'a.' 
+```
+#### Se buscará cualquier 'a' y que justo despues  tenga cualquier otro carácter
+```sh
+pattern = r'a.' 
+texto = "abc ade a " # Datos a evaluar
+# Esta evaluacion devolverá 'ab' y 'ad' por que son todas las 'a' seguida de otro carácter. 
+resultado = re.findall(pattern, texto) # Así se aplica REGEX (.)
+print("Texto a Analizar:", texto)
+print("Regex utilizada:", pattern)
 print("Resultado:", resultado, "\n")
 ```
 
-# 1. El punto (.) representa cualquier carácter excepto un salto de línea.
-pattern = r'a.'  # 'a' seguido de cualquier carácter
-texto = "abc ade"
-# Se devuelve 'ab' (la 'a' seguida de 'b') y 'ad' (la 'a' seguida de 'd')
-resultado = re.findall(pattern, texto)
-print("1. Punto (.)")
-print("Explicación: '.' significa cualquier carácter, excepto salto de línea. Por ello, 'a.' busca la 'a' seguida de otro carácter.")
-print("Texto:", texto)
-print("Regex:", pattern)
-print("Resultado:", resultado, "\n")
-
+# 2. El símbolo (^) o (caret) indica el inicio de una línea.
 ```sh
-
-
-```
-# 2. El símbolo ^ indica el inicio de una línea.
 pattern = r'^Hola'
-texto = "Hola Mundo\nAdiós Mundo"
-# Con el flag MULTILINE, ^ verifica el inicio de cada línea.
-resultado = re.findall(pattern, texto, flags=re.MULTILINE)
-print("2. Inicio de línea (^)")
-print("Explicación: '^' ancla el patrón al inicio de la línea. Se busca 'Hola' solo al comienzo de cada línea.")
-print("Texto:\n", texto)
-print("Regex:", pattern)
-print("Resultado:", resultado, "\n")
-
-```sh
-
-
 ```
-# 3. El símbolo $ indica el final de una línea.
+#### Se buscará cualquier linea que al iniciar tenga 'Hola'
+```sh
+pattern = r'^Hola'
+texto = """Hola Mundo 1
+HolaMundo 2
+hola Mundo 3
+Adiós Mundo""" # Datos a evaluar
+resultado = re.findall(pattern, texto, flags=re.MULTILINE)
+# flags=re.MULTILINE --- Con el flag MULTILINE, ^ verifica el inicio de cada línea.
+# Se evaluaran todas las lineas y te devolverá el inicio las lineas que empiezan de acuerdo a la indicación.
+print("Texto a Analizar: ", texto)
+print("Regex utilizada:", pattern)
+print("Resultado:", resultado)
+```
+
+# 3. El símbolo ($) indica el final de una línea.
+```sh
 pattern = r'Mundo$'
-# Aquí se busca la palabra 'Mundo' que se encuentre al final de la línea.
+```
+#### Se buscará cualquier linea que al final se  encuentre la palabra 'Mundo'.
+```sh
+pattern = r'Mundo$'
+texto = """Hola Mundo
+HolaMundo 2
+hola Mundo
+Adiós Mundo """ # Datos a evaluar
 resultado = re.findall(pattern, texto, flags=re.MULTILINE)
-print("3. Final de línea ($)")
-print("Explicación: '$' ancla el patrón al final de la línea. 'Mundo$' captura 'Mundo' si es lo último en la línea.")
-print("Texto:\n", texto)
-print("Regex:", pattern)
-print("Resultado:", resultado, "\n")
-
-```sh
-
-
+print("Texto a Analizar: ", texto)
+print("Regex utilizada:", pattern)
+print("Resultado:", resultado)
 ```
-# 4. El backslash (\) se utiliza para escapar caracteres especiales.
-pattern = r'\.'   # Busca un punto literal.
-texto = "a.b, c,d"
+
+# 4. El backslash (\\) se utiliza para especificar caracteres especiales.
+```sh
+pattern = r'\.'   
+```
+#### Se buscará literalmente cualquier punto(.).
+```sh
+pattern = r'\.'
+texto = "a.b, c,d. ... .,."
 resultado = re.findall(pattern, texto)
-print("4. Caracter de escape (\\)")
-print("Explicación: La barra invertida '\\' se usa para escapar el punto, de modo que '\\.' busca el carácter '.' literal.")
-print("Texto:", texto)
-print("Regex:", pattern)
-print("Resultado:", resultado, "\n")
-
-```sh
-
-
+print("Texto a Analizar: ", texto)
+print("Regex utilizada:", pattern)
+print("Resultado:", resultado)
 ```
-# =============================================================================
-# CUANTIFICADORES
-# =============================================================================
+# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
+# _CUANTIFICADORES_
+```sh
+```
 ```sh
 
 
