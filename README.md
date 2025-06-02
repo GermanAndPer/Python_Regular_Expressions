@@ -14,7 +14,7 @@ Las expresiones regulares (regex) son patrones que nos permiten buscar, extraer,
 - Por lo mismo lo primero que se importará será el modulo  _RE_.
   ```python
     import re
-# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
+# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
 # _METACARACTERES BÁSICOS_
 
 # 1. El punto (.) representa cualquier carácter excepto un salto de línea.
@@ -82,69 +82,64 @@ print("Texto a Analizar: ", texto)
 print("Regex utilizada:", pattern)
 print("Resultado:", resultado)
 ```
-# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
+# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
 # _CUANTIFICADORES_
-```sh
-```
-```sh
+# 1. El asterisco (*) indica 0 o más repeticiones del elemento anterior.
 
-
-```
-# El asterisco (*) indica 0 o más repeticiones del elemento anterior.
+```sh
 pattern = r'go*'
-texto = "g go goooo"
-# En 'go*', 'g' seguido de cero o más 'o', por lo que en el primer término se encuentra solo 'g'.
-resultado = re.findall(pattern, texto)
-print("5. Cuantificador *")
-print("Explicación: '*' indica 0 o más repeticiones. En 'go*' se busca 'g' seguido de cero o más 'o'.")
-print("Texto:", texto)
-print("Regex:", pattern)
-print("Resultado:", resultado, "\n")
-
-```sh
-
-
 ```
-# El signo más (+) indica 1 o más repeticiones.
+#### En 'go*',  se busca 'g' y 'g' y que seguido todas las 'o' que se encuentren. Si hya otros carácteres, los omite.
+```sh
+pattern = r'go*'
+texto = "g go goooo ga"
+resultado = re.findall(pattern, texto)
+print("Texto a Analizar: ", texto)
+print("Regex utilizada:", pattern)
+print("Resultado:", resultado)
+```
+# 2. El signo más (+) indica 1 o más repeticiones.
+```sh
+pattern = r'go+'
+```
+#### Solo se captura si al menos hay 1 'o'. A diferencia del *, no te devuelve si aparece solo la 'g'
+```sh
 pattern = r'go+'
 texto = "g go goooo"
-# Solo se captura si al menos hay 1 'o'.
 resultado = re.findall(pattern, texto)
-print("6. Cuantificador +")
-print("Explicación: '+' indica 1 o más repeticiones. 'go+' requiere que tras la 'g' haya al menos una 'o'.")
-print("Texto:", texto)
-print("Regex:", pattern)
-print("Resultado:", resultado, "\n")
-
-```sh
-
-
+print("Texto a Analizar: ", texto)
+print("Regex utilizada:", pattern)
+print("Resultado:", resultado)
 ```
-# El signo de interrogación (?) indica 0 o 1 repetición del elemento anterior.
+# 3. El signo de interrogación (?) indica 0 o 1 repetición del elemento anterior.
+```sh
+pattern = r'go?'
+```
+#### 'go?' captura 'g' (sin 'o') y 'go' (con una 'o'), pero en 'goo' solo toma la primera instancia.
+```sh
 pattern = r'go?'
 texto = "g go goo"
-# 'go?' captura 'g' (cero 'o') y 'go' (una 'o'), pero en 'goo' solo toma la primera instancia.
 resultado = re.findall(pattern, texto)
-print("7. Cuantificador ?")
-print("Explicación: '?' indica 0 o 1 repetición. Busca 'g' sola o 'g' seguida de una única 'o'.")
-print("Texto:", texto)
-print("Regex:", pattern)
-print("Resultado:", resultado, "\n")
+print("Texto a Analizar: ", texto)
+print("Regex utilizada:", pattern)
+print("Resultado:", resultado)
+```
+# 4. Uso de {n}, {n,} y {n,m} para repeticiones exactas o rangos.
 
 ```sh
-
-
+pattern = r'\d{3}'
 ```
-# Uso de {n}, {n,} y {n,m} para repeticiones exactas o rangos.
+#### Busca secuencias de exactamente 3 dígitos.
+```sh
 pattern = r'\d{3}'
 texto = "123456789"
-# Busca secuencias de exactamente 3 dígitos.
 resultado = re.findall(pattern, texto)
 print("8. Cuantificador {n}")
 print("Explicación: '\\d{3}' busca grupos de exactamente 3 dígitos consecutivos.")
 print("Texto:", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado, "\n")
+```
 
 pattern = r'\d{2,}'
 texto = "1 12 123 1234"
