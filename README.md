@@ -10,20 +10,20 @@ Las expresiones regulares (regex) son patrones que nos permiten buscar, extraer,
 ### NOTAS:
 1. Para carácteres especificos, la busqueda es 100% especifica. Si buscas 'a' solo buscará 'a'. Significa que ignorará a la 'A' 
 --------------------------------------
-- **`.`**: 
-- Por lo mismo lo primero que se importará será el modulo  _RE_.
-  ```python
-    import re
+Por lo mismo lo primero que se importará será el modulo  _RE_.
+```python
+import re
+```
 # ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
 # _METACARACTERES BÁSICOS_
 
 # 1. El punto (.) representa cualquier carácter excepto un salto de línea.
 
-```sh
+```python
 pattern = r'a.' 
 ```
 #### Se buscará cualquier 'a' y que justo despues  tenga cualquier otro carácter
-```sh
+```python
 pattern = r'a.' 
 texto = "abc ade a " # Datos a evaluar
 # Esta evaluacion devolverá 'ab' y 'ad' por que son todas las 'a' seguida de otro carácter. 
@@ -34,11 +34,11 @@ print("Resultado:", resultado, "\n")
 ```
 
 # 2. El símbolo (^) o (caret) indica el inicio de una línea.
-```sh
+```python
 pattern = r'^Hola'
 ```
 #### Se buscará cualquier linea que al iniciar tenga 'Hola'
-```sh
+```python
 pattern = r'^Hola'
 texto = """Hola Mundo 1
 HolaMundo 2
@@ -53,11 +53,11 @@ print("Resultado:", resultado)
 ```
 
 # 3. El símbolo ($) indica el final de una línea.
-```sh
+```python
 pattern = r'Mundo$'
 ```
 #### Se buscará cualquier linea que al final se  encuentre la palabra 'Mundo'.
-```sh
+```python
 pattern = r'Mundo$'
 texto = """Hola Mundo
 HolaMundo 2
@@ -70,11 +70,11 @@ print("Resultado:", resultado)
 ```
 
 # 4. El backslash (\\) se utiliza para especificar caracteres especiales.
-```sh
+```python
 pattern = r'\.'   
 ```
 #### Se buscará literalmente cualquier punto(.).
-```sh
+```python
 pattern = r'\.'
 texto = "a.b, c,d. ... .,."
 resultado = re.findall(pattern, texto)
@@ -84,13 +84,13 @@ print("Resultado:", resultado)
 ```
 # ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
 # _CUANTIFICADORES_
-# 1. El asterisco (*) indica 0 o más repeticiones del elemento anterior.
+# 5. El asterisco (*) indica 0 o más repeticiones del elemento anterior.
 
-```sh
+```python
 pattern = r'go*'
 ```
 #### En 'go*',  se busca 'g' y 'g' y que seguido todas las 'o' que se encuentren. Si hya otros carácteres, los omite.
-```sh
+```python
 pattern = r'go*'
 texto = "g go goooo ga"
 resultado = re.findall(pattern, texto)
@@ -98,12 +98,12 @@ print("Texto a Analizar: ", texto)
 print("Regex utilizada:", pattern)
 print("Resultado:", resultado)
 ```
-# 2. El signo más (+) indica 1 o más repeticiones.
-```sh
+# 6. El signo más (+) indica 1 o más repeticiones.
+```python
 pattern = r'go+'
 ```
 #### Solo se captura si al menos hay 1 'o'. A diferencia del *, no te devuelve si aparece solo la 'g'
-```sh
+```python
 pattern = r'go+'
 texto = "g go goooo"
 resultado = re.findall(pattern, texto)
@@ -111,12 +111,12 @@ print("Texto a Analizar: ", texto)
 print("Regex utilizada:", pattern)
 print("Resultado:", resultado)
 ```
-# 3. El signo de interrogación (?) indica 0 o 1 repetición del elemento anterior.
-```sh
+# 7. El signo de interrogación (?) indica 0 o 1 repetición del elemento anterior.
+```python
 pattern = r'go?'
 ```
 #### 'go?' captura 'g' (sin 'o') y 'go' (con una 'o'), pero en 'goo' solo toma la primera instancia.
-```sh
+```python
 pattern = r'go?'
 texto = "g go goo"
 resultado = re.findall(pattern, texto)
@@ -124,13 +124,13 @@ print("Texto a Analizar: ", texto)
 print("Regex utilizada:", pattern)
 print("Resultado:", resultado)
 ```
-# 4. Uso de {n}, {n,} y {n,m} para repeticiones exactas o rangos.
+# 8. Uso de {n}, {n,} y {n,m} para repeticiones exactas o rangos.
 
-```sh
+```python
 pattern = r'\d{3}'
 ```
 #### Busca secuencias de exactamente 3 dígitos.
-```sh
+```python
 pattern = r'\d{3}'
 texto = "123456789"
 resultado = re.findall(pattern, texto)
@@ -140,75 +140,72 @@ print("Texto:", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado, "\n")
 ```
-
+# 9. Busca grupos de 2 o más dígitos.
+```python
+pattern = r'\d{2,}'
+```
+#### busca grupos de al menos 2 dígitos consecutivos.
+```python
 pattern = r'\d{2,}'
 texto = "1 12 123 1234"
-```sh
-
-
-```
-# Busca grupos de 2 o más dígitos.
 resultado = re.findall(pattern, texto)
 print("9. Cuantificador {n,}")
 print("Explicación: '\\d{2,}' busca grupos de al menos 2 dígitos consecutivos.")
 print("Texto:", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado, "\n")
-
+```
+# 10. Busca grupos de 2 a 3 dígitos.
+```python
 pattern = r'\d{2,3}'
+```
+#### Busca grupos de dígitos donde la cantidad esté en el rango de 2 a 3.
+```python
 texto = "1 12 123 1234"
-# Busca grupos de 2 a 3 dígitos.
 resultado = re.findall(pattern, texto)
 print("10. Cuantificador {n,m}")
 print("Explicación: '\\d{2,3}' busca grupos de dígitos donde la cantidad esté en el rango de 2 a 3.")
 print("Texto:", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado, "\n")
-
-```sh
-
-
 ```
-# =============================================================================
-# GRUPOS Y CLASES DE CARACTERES
-# =============================================================================
-```sh
 
-
+# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
+# _GRUPOS Y CLASES DE CARACTERES_
+# 1. Los corchetes [] se usan para definir clases de caracteres.
+```python
+pattern = r'[aeiou]'
 ```
-# Los corchetes [] se usan para definir clases de caracteres.
+#### Busca cualquier vocal minúscula.
+```python
 pattern = r'[aeiou]'
 texto = "Python"
-
-```sh
-
-
-```
-# Busca cualquier vocal minúscula.
 resultado = re.findall(pattern, texto)
 print("11. Clase de caracteres [aeiou]")
 print("Explicación: '[aeiou]' busca cualquier carácter que sea una vocal (a, e, i, o, u).")
 print("Texto:", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado, "\n")
-```sh
-
-
 ```
-# El símbolo ^ dentro de corchetes niega la clase, es decir, encuentra todo lo que no esté incluido.
+# 2. El símbolo ^ dentro de corchetes niega la clase, es decir, encuentra todo lo que no esté incluido.
+```python
 pattern = r'[^aeiou]'
-# Busca cualquier carácter que no sea vocal.
+```
+#### Busca cualquier carácter que no sea vocal.
+```python
 resultado = re.findall(pattern, texto)
 print("12. Negación en clase de caracteres [^...]")
 print("Explicación: '[^aeiou]' devuelve todos los caracteres que no son vocales.")
 print("Texto:", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado, "\n")
-```sh
-
-
 ```
-# Rango de caracteres. Por ejemplo, [a-z] captura letras minúsculas.
+# 3. Rango de caracteres. Por ejemplo, [a-z] captura letras minúsculas.
+```python
+pattern = r'[a-z]'
+```
+#### Busca cualquier letra minúscula del abecedario (de la a a la z).
+```python
 pattern = r'[a-z]'
 texto = "Python3"
 resultado = re.findall(pattern, texto)
@@ -217,11 +214,14 @@ print("Explicación: '[a-z]' busca cualquier letra minúscula del abecedario (de
 print("Texto:", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado, "\n")
-```sh
-
-
 ```
-# Alternancia con | (OR).
+# 4. Alternancia con | (OR).
+
+```python
+pattern = r'apple|banana'
+```
+#### Actúa como OR. Busca 'apple' o 'banana' en el texto."
+```python
 pattern = r'apple|banana'
 texto = "I like apple and banana"
 resultado = re.findall(pattern, texto)
@@ -230,12 +230,13 @@ print("Explicación: '|' actúa como OR. Busca 'apple' o 'banana' en el texto.")
 print("Texto:", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado, "\n")
-```sh
-
-
 ```
-# Agrupación con paréntesis () para capturar grupos.
+# 5. Agrupación con paréntesis () para capturar grupos.
+```python
 pattern = r'(ab)+'
+```
+#### Agrupa la subcadena 'ab' y busca que se repita una o más veces.
+```python
 texto = "abababx"
 resultado = re.search(pattern, texto)
 print("15. Grupo de captura ()")
@@ -244,11 +245,13 @@ if resultado:
     print("Texto:", texto)
     print("Regex:", pattern)
     print("Resultado:", resultado.group(), "\n")
-```sh
-
-
 ```
-# Grupo sin captura (?:...), se usa cuando no se necesita almacenar el grupo.
+# 6. Grupo sin captura (?:...), se usa cuando no se necesita almacenar el grupo.
+```python
+pattern = r'(?:ab)+'
+```
+Agrupa 'ab' sin capturarlo aparte; se devuelve la coincidencia completa
+```python
 pattern = r'(?:ab)+'
 resultado = re.findall(pattern, texto)
 print("16. Grupo sin captura (?:...)")
@@ -256,40 +259,34 @@ print("Explicación: '(?:ab)+' agrupa 'ab' sin capturarlo aparte; se devuelve la
 print("Texto:", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado, "\n")
-```sh
-
-
 ```
 
-# =============================================================================
-# BÚSQUEDA Y REEMPLAZO
-# =============================================================================
-```sh
+# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
+# _BÚSQUEDA Y REEMPLAZO_
 
-
+# 1. Usando re.sub() para reemplazar patrones:
+```python
+pattern = r'\d{4}-\d{2}-\d{2}'
 ```
-# Usando re.sub() para reemplazar patrones:
+#### Busca una fecha con el formato YYYY-MM-DD.
+```python
 texto = "La fecha es 2025-06-01."
-pattern = r'\d{4}-\d{2}-\d{2}'  # Busca una fecha con el formato YYYY-MM-DD.
 nuevo_texto = re.sub(pattern, 'FECHA', texto)
 print("17. Reemplazo con re.sub()")
 print("Explicación: Se reemplaza el patrón de fecha (YYYY-MM-DD) por la cadena 'FECHA'.")
 print("Texto original:", texto)
 print("Regex:", pattern)
 print("Texto modificado:", nuevo_texto, "\n")
-```sh
-
-
 ```
+# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
+# ___LOOKAHEAD y LOOKBEHIND___
+# 1. Lookahead positivo (?=...) verifica que lo que sigue cumpla un patrón, sin incluirlo en la coincidencia.
 
-# =============================================================================
-# LOOKAHEAD y LOOKBEHIND
-# =============================================================================
-```sh
-
-
+```python
+pattern = r'foo(?=bar)'
 ```
-# Lookahead positivo (?=...) verifica que lo que sigue cumpla un patrón, sin incluirlo en la coincidencia.
+#### Busca 'foo' solo si va seguido directamente por 'bar'.
+```python
 pattern = r'foo(?=bar)'
 texto = "foobar fooqux"
 resultado = re.findall(pattern, texto)
@@ -298,11 +295,13 @@ print("Explicación: 'foo(?=bar)' busca 'foo' solo si va seguido directamente po
 print("Texto:", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado, "\n")
-```sh
-
-
 ```
-# Lookahead negativo (?!...) verifica que lo siguiente NO cumpla un patrón.
+# 2. Lookahead negativo (?!...) verifica que lo siguiente NO cumpla un patrón.
+```python
+pattern = r'foo(?!bar)'
+```
+#### Captura 'foo' únicamente si no va seguido de 'bar'.
+```python
 pattern = r'foo(?!bar)'
 resultado = re.findall(pattern, texto)
 print("19. Lookahead negativo (?!...)")
@@ -310,11 +309,13 @@ print("Explicación: 'foo(?!bar)' captura 'foo' únicamente si no va seguido de 
 print("Texto:", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado, "\n")
-```sh
-
-
 ```
-# Lookbehind positivo (?<=...) busca un patrón solo si está precedido por otro.
+# 3. Lookbehind positivo (?<=...) busca un patrón solo si está precedido por otro.
+```python
+pattern = r'(?<=\$)\d+'
+```
+#### Busca secuencias de dígitos que aparezcan justo después del signo '$'.
+```python
 pattern = r'(?<=\$)\d+'
 texto = "$100 and $200"
 resultado = re.findall(pattern, texto)
@@ -323,11 +324,13 @@ print("Explicación: '(?<=\\$)\\d+' busca secuencias de dígitos que aparezcan j
 print("Texto:", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado, "\n")
-```sh
-
-
 ```
-# Lookbehind negativo (?<!...) busca un patrón solo si NO está precedido por otro.
+# 4. Lookbehind negativo (?<!...) busca un patrón solo si NO está precedido por otro.
+```python
+pattern = r'(?<!\$)\d+'
+```
+#### Busca dígitos que no estén inmediatamente precedidos por '$'.
+```python
 pattern = r'(?<!\$)\d+'
 texto = "$100 and 300"
 resultado = re.findall(pattern, texto)
@@ -336,20 +339,21 @@ print("Explicación: '(?<!\\$)\\d+' busca dígitos que no estén inmediatamente 
 print("Texto:", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado, "\n")
-```sh
-
-
 ```
 
-# =============================================================================
-# FLAGS o MODIFICADORES
-# =============================================================================
-```sh
 
-
-```
+# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
+# ___FLAGS o MODIFICADORES___
+# 1.
 # re.IGNORECASE o re.I: Ignora mayúsculas/minúsculas.
 # re.MULTILINE o re.M: Hace que ^ y $ actúen al inicio y fin de cada línea.
+
+```python
+pattern = r'^hola'
+```
+#### Con re.IGNORECASE no se distingue entre mayúsculas y minúsculas y con re.MULTILINE se aplica el patrón a cada línea."
+```python
+
 texto = "Hola\nhola"
 pattern = r'^hola'
 resultado = re.findall(pattern, texto, flags=re.IGNORECASE | re.MULTILINE)
@@ -358,15 +362,16 @@ print("Explicación: Con re.IGNORECASE no se distingue entre mayúsculas y minú
 print("Texto:\n", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado, "\n")
+```
 
-```sh
+```python
 
 
 ```
+# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
+# ___EJEMPLOS COMBINADOS___
 # =============================================================================
-# EJEMPLOS COMBINADOS
-# =============================================================================
-```sh
+```python
 
 
 ```
@@ -385,7 +390,7 @@ print("Explicación: '^(?!1000).*' captura las líneas que no inician con '1000'
 print("Texto completo:\n", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado, "\n")
-```sh
+```python
 
 
 ```
@@ -408,7 +413,7 @@ if resultado:
     print("Resultado: El correo es válido\n")
 else:
     print("Correo inválido\n")
-```sh
+```python
 
 
 ```
@@ -422,7 +427,7 @@ print("Explicación: '\\b\\d{4}-\\d{2}-\\d{2}\\b' busca fechas con formato 'YYYY
 print("Texto:", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado, "\n")
-```sh
+```python
 
 
 ```
@@ -440,7 +445,7 @@ print("Explicación: '[-+]?\\d+\\.?\\d*' captura números enteros o decimales, c
 print("Texto:", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado, "\n")
-```sh
+```python
 
 
 ```
@@ -448,7 +453,7 @@ print("Resultado:", resultado, "\n")
 # =============================================================================
 # EXPRESIONES REGULARES EN ANÁLISIS DE DATOS
 # =============================================================================
-```sh
+```python
 
 
 ```
@@ -466,7 +471,7 @@ print("Explicación: '\\b\\d{5}(?:-\\d{4})?\\b' busca el formato de códigos pos
 print("Texto:", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado)
-```sh
+```python
 
 
 ```
@@ -483,7 +488,7 @@ print("Explicación: 'https?://(?:www\\.)?\\S+' capta URLs independientemente de
 print("Texto:", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado)
-```sh
+```python
 
 
 ```
@@ -498,7 +503,7 @@ if resultado:
     print("Resultado: El correo es válido")
 else:
     print("Correo inválido")
-```sh
+```python
 
 
 ```
@@ -514,7 +519,7 @@ print("Texto limpio:", repr(texto_limpio), "\n")
 
 print("Fin del cheatsheet de expresiones regulares en Python.")
    
-   ```sh
+   ```python
 
 
 ```
