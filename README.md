@@ -14,8 +14,8 @@ Por lo mismo lo primero que se importará será el modulo  _RE_.
 ```python
 import re
 ```
-# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
-# _METACARACTERES BÁSICOS_
+# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
+# ___METACARACTERES BÁSICOS___
 
 # 1. El punto (.) representa cualquier carácter excepto un salto de línea.
 
@@ -82,8 +82,8 @@ print("Texto a Analizar: ", texto)
 print("Regex utilizada:", pattern)
 print("Resultado:", resultado)
 ```
-# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
-# _CUANTIFICADORES_
+# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
+# ___CUANTIFICADORES___
 # 5. El asterisco (*) indica 0 o más repeticiones del elemento anterior.
 
 ```python
@@ -170,8 +170,9 @@ print("Regex:", pattern)
 print("Resultado:", resultado, "\n")
 ```
 
-# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
-# _GRUPOS Y CLASES DE CARACTERES_
+# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
+# ___GRUPOS Y CLASES DE CARACTERES___
+
 # 1. Los corchetes [] se usan para definir clases de caracteres.
 ```python
 pattern = r'[aeiou]'
@@ -261,9 +262,8 @@ print("Regex:", pattern)
 print("Resultado:", resultado, "\n")
 ```
 
-# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
-# _BÚSQUEDA Y REEMPLAZO_
-
+# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
+# ___BÚSQUEDA Y REEMPLAZO___
 # 1. Usando re.sub() para reemplazar patrones:
 ```python
 pattern = r'\d{4}-\d{2}-\d{2}'
@@ -278,7 +278,7 @@ print("Texto original:", texto)
 print("Regex:", pattern)
 print("Texto modificado:", nuevo_texto, "\n")
 ```
-# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
+# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
 # ___LOOKAHEAD y LOOKBEHIND___
 # 1. Lookahead positivo (?=...) verifica que lo que sigue cumpla un patrón, sin incluirlo en la coincidencia.
 
@@ -342,7 +342,7 @@ print("Resultado:", resultado, "\n")
 ```
 
 
-# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
+# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
 # ___FLAGS o MODIFICADORES___
 # 1.
 # re.IGNORECASE o re.I: Ignora mayúsculas/minúsculas.
@@ -368,20 +368,20 @@ print("Resultado:", resultado, "\n")
 
 
 ```
-# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
+# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
 # ___EJEMPLOS COMBINADOS___
-# =============================================================================
-```python
-
-
-```
 # 1. Coincidir líneas que NO empiecen con "1000"
+
+```python
+pattern = r'^(?!1000).*'
+```
+#### '^(?!1000)' utiliza lookahead negativo para excluir líneas cuyo inicio sea "1000".
+
+```python
 texto = """Line1
 1000-Error
 2000-Success
 1000Start"""
-pattern = r'^(?!1000).*'
-# '^(?!1000)' utiliza lookahead negativo para excluir líneas cuyo inicio sea "1000".
 resultado = re.findall(pattern, texto, flags=re.MULTILINE)
 print("23. Líneas que no empiecen con '1000'")
 print("Explicación: '^(?!1000).*' captura las líneas que no inician con '1000'.\n" +
@@ -390,14 +390,16 @@ print("Explicación: '^(?!1000).*' captura las líneas que no inician con '1000'
 print("Texto completo:\n", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado, "\n")
-```python
-
-
 ```
-
-
 # 2. Validación de un correo electrónico
+
+```python
+pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+```
+#### El patrón valida la estructura general de un correo electrónico.
 correo = "ejemplo@dominio.com"
+
+```python
 pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
 # La estructura es:
 #   - ^[a-zA-Z0-9._%+-]+ : Inicio y uno o más caracteres válidos para el usuario.
@@ -413,11 +415,15 @@ if resultado:
     print("Resultado: El correo es válido\n")
 else:
     print("Correo inválido\n")
-```python
-
-
 ```
+
 # 3. Extracción de fechas en formato 'YYYY-MM-DD'
+
+```python
+pattern = r'\b\d{4}-\d{2}-\d{2}\b'
+```
+#### \b indica límite de palabra y se asegura que se capture la fecha completa.
+```python
 texto = "Fechas: 2025-06-01, 1999-12-31."
 pattern = r'\b\d{4}-\d{2}-\d{2}\b'
 # \b indica límite de palabra y se asegura que se capture la fecha completa.
@@ -427,11 +433,14 @@ print("Explicación: '\\b\\d{4}-\\d{2}-\\d{2}\\b' busca fechas con formato 'YYYY
 print("Texto:", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado, "\n")
-```python
-
-
 ```
 # 4. Extracción de números (enteros y decimales, pudiendo ser negativos o positivos)
+```python
+pattern = r'[-+]?\d+\.?\d*'
+```
+#### Captura números enteros o decimales, con signo opcional
+
+```python
 texto = "Valores: 3, 3.14, -2, -2.718"
 pattern = r'[-+]?\d+\.?\d*'
 # Desglose:
@@ -445,18 +454,24 @@ print("Explicación: '[-+]?\\d+\\.?\\d*' captura números enteros o decimales, c
 print("Texto:", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado, "\n")
+```
+
+
+
 ```python
 
 
 ```
 
-# =============================================================================
-# EXPRESIONES REGULARES EN ANÁLISIS DE DATOS
-# =============================================================================
+# ️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️⬇️
+# ___EXPRESIONES REGULARES EN ANÁLISIS DE DATOS___
+
 ```python
-
-
+pattern = r'\b\d{5}(?:-\d{4})?\b'
 ```
+#### A) Busca el formato de códigos postales, con o sin extensión
+
+```python
 print("27. Ejemplos comunes en análisis de datos:")
 
 # a) Extracción de Códigos Postales (US ZIP Codes)
@@ -471,11 +486,13 @@ print("Explicación: '\\b\\d{5}(?:-\\d{4})?\\b' busca el formato de códigos pos
 print("Texto:", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado)
-```python
-
-
 ```
+
 # b) Detección de URLs
+```python
+pattern = r'https?://(?:www\.)?\S+'
+```
+```python
 pattern = r'https?://(?:www\.)?\S+'
 # Desglose:
 #   https?://      : 'http://' o 'https://'
@@ -488,11 +505,14 @@ print("Explicación: 'https?://(?:www\\.)?\\S+' capta URLs independientemente de
 print("Texto:", texto)
 print("Regex:", pattern)
 print("Resultado:", resultado)
-```python
-
-
 ```
 # c) Validación de correos electrónicos (ejemplo repetido, muy común en análisis)
+
+```python
+pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+```
+
+```python
 pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
 correo = "usuario@dominio.com"
 resultado = re.match(pattern, correo)
@@ -503,11 +523,13 @@ if resultado:
     print("Resultado: El correo es válido")
 else:
     print("Correo inválido")
-```python
-
-
 ```
+
 # d) Limpieza de múltiples espacios en un texto
+```python
+pattern = r'\s+'
+```
+```python
 texto = "  datos   con  muchos   espacios "
 pattern = r'\s+'
 texto_limpio = re.sub(pattern, ' ', texto).strip()
@@ -516,12 +538,6 @@ print("Explicación: '\\s+' captura secuencias de espacios, tabs o saltos de lí
 print("Texto original:", repr(texto))
 print("Regex:", pattern)
 print("Texto limpio:", repr(texto_limpio), "\n")
-
-print("Fin del cheatsheet de expresiones regulares en Python.")
-   
-   ```python
-
-
 ```
    
    
